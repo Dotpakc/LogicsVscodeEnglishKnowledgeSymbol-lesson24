@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    
+    <div class="navbar bg-base-300">
+        <div class="container mx-auto">
+        <div class="flex-1">
+          <a class="btn btn-ghost text-xl font-bold" href="/">🍏LogicsVscodeEnglishKnowledgeSymbol</a>
+        </div>
+        <div class="flex-none">
+          <ul class="menu menu-horizontal px-1">
+            <li><a href="/lol" class="btn">LOL</a></li>
+            <li><a href="/about" class="btn">About</a></li>
+            <li><a href="/games" class="btn">Games</a></li>
+           
+          </ul>
+        </div>
+        </div>
+      </div>
+
+      <div class = "container mx-auto">
+    
+    {% block content %}
+
+    {% endblock %}
+
+    </div>
+
+
+</body>
+</html>

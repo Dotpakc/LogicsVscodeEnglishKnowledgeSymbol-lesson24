@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="rounded-lg bg-base-200 p-4">
+    <h1 class="text-4xl text-center">Games</h1>
+    <div class="grid grid-cols-7  gap-4">
+        {% for game in data %}
+        <div class="rounded-lg bg-base-100 p-4 flex justify-center items-center flex-col hover:shadow-lg transition duration-300 hover:bg-base-200 transform hover:scale-105">  
+            <div class="flex justify-center items-center mb-4 bg-base-300 rounded-lg p-4">
+                <img src="{{ game.img }}" alt="{{ game.title }}" class="w-full">
+            </div>
+            <h2 class="text-2xl text-center my-2 font-bold text-primary">{{ game.title }}</h2>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="flex justify-center items-center my-4">
+        <div class="join self-center my-4">
+            <a href="/games?page={{ paginator.prev}}" class="join-item btn btn-ghost">Previous</a>
+            <button class="btn btn-secondary">{{ paginator.current }} of {{ paginator.total }}</button>
+            <a href="/games?page={{ paginator.next}}" class="join-item btn btn-ghost">Next</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
