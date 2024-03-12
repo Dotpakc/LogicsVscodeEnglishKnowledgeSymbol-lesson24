@@ -35,7 +35,7 @@ def lol():
 
 @app.route("/games")
 def games():
-    PAGINATOR_SIZE = 14
+    PAGINATOR_SIZE = request.args.get("limit", 8, type=int)
     
     page = request.args.get("page", 1, type=int)
     if page < 1 or page > len(all_data)//PAGINATOR_SIZE + 1 :
@@ -45,7 +45,8 @@ def games():
         "next": page + 1,
         "prev": page - 1,
         "current": page,
-        "total": len(all_data)//PAGINATOR_SIZE + 1 
+        "total": len(all_data)//PAGINATOR_SIZE + 1,
+        "limit": PAGINATOR_SIZE,
     }
     list_games = all_data[(page - 1) * PAGINATOR_SIZE : page * PAGINATOR_SIZE]
     

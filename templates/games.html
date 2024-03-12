@@ -5,25 +5,45 @@
 
 <div class="rounded-lg bg-base-200 p-4">
     <h1 class="text-4xl text-center">Games</h1>
+    <div class="flex justify-center items-center my-4">
+        <div class='flex justify-center items-center'>
+            <label for="limit" class="label mr-2">Show</label>
+            <select name="limit" id="limit" class="select select-bordered w-24">
+                <option value="8" {% if paginator.limit == 8 %} selected {% endif %}>8</option>
+                <option value="16" {% if paginator.limit == 16 %} selected {% endif %}>16</option>
+                <option value="24" {% if paginator.limit == 24 %} selected {% endif %}>24</option>
+                <option value="32" {% if paginator.limit == 32 %} selected {% endif %}>32</option>
+                <option value="40" {% if paginator.limit == 40 %} selected {% endif %}>40</option>
+            </select>
+        </div>  
+    </div>
     <div class="grid grid-cols-7  gap-4">
         {% for game in data %}
-        <div class="rounded-lg bg-base-100 p-4 flex justify-center items-center flex-col hover:shadow-lg transition duration-300 hover:bg-base-200 transform hover:scale-105">  
+        <div class="rounded-lg bg-base-100 flex justify-center items-center flex-col hover:shadow-lg transition duration-300 hover:bg-base-200 transform hover:scale-105">  
             <div class="flex justify-center items-center mb-4 bg-base-300 rounded-lg p-4">
                 <img src="{{ game.img }}" alt="{{ game.title }}" class="w-full">
             </div>
-            <h2 class="text-2xl text-center my-2 font-bold text-primary">{{ game.title }}</h2>
+            <h2 class="text-1xl text-center my-2 font-bold text-primary">{{ game.title }}</h2>
         </div>
         {% endfor %}
     </div>
 
     <div class="flex justify-center items-center my-4">
         <div class="join self-center my-4">
-            <a href="/games?page={{ paginator.prev}}" class="join-item btn btn-ghost">Previous</a>
+            <a href="/games?page={{ paginator.prev}}&limit={{ paginator.limit }}" class="join-item btn btn-ghost">Prev</a>
             <button class="btn btn-secondary">{{ paginator.current }} of {{ paginator.total }}</button>
-            <a href="/games?page={{ paginator.next}}" class="join-item btn btn-ghost">Next</a>
+            <a href="/games?page={{ paginator.next}}&limit={{ paginator.limit }}" class="join-item btn btn-ghost">Next</a>
         </div>
     </div>
 </div>
+
+
+<script>
+    const limit = document.getElementById('limit');
+    limit.addEventListener('change', (e) => {
+        window.location.href = `/games?page=${ {{paginator.current}} }&limit=${e.target.value}`;
+    });
+</script>
 
 
 {% endblock %}
