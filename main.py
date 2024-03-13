@@ -32,6 +32,10 @@ def lol():
     return render_template("lol.html")
 
 
+@app.route("/tg")
+def tg():
+    return render_template("tg.html")
+
 
 @app.route("/games")
 def games():
@@ -53,4 +57,4 @@ def games():
     return render_template("games.html", data=list_games, paginator=paginator)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)

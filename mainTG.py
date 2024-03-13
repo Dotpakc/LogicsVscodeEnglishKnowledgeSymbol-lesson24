@@ -13,6 +13,8 @@ from aiogram.utils import keyboard
 from aiogram.filters import CommandStart, Command   
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
+#WEB APP
+
 
 TOKEN = config("TOKEN")
 
@@ -22,7 +24,7 @@ bot = Bot(TOKEN)
 
 #MENU
 mainmenu = keyboard.InlineKeyboardBuilder()
-mainmenu.row(types.InlineKeyboardButton(text="🎮Випадкова Гра", callback_data="random_game"))
+mainmenu.row(types.InlineKeyboardButton(text="Пошук ігор", web_app=types.WebAppInfo(url="https://lol.ithillelcraft.com/tg")))
 
 
 
@@ -30,7 +32,10 @@ mainmenu.row(types.InlineKeyboardButton(text="🎮Випадкова Гра", ca
 async def start(message: types.Message):
     await message.answer("Привіт! Я бот для пошуку ігор на Metacritic",reply_markup=mainmenu.as_markup())
 
-
+@dp.message()
+async def web_app_handler(message: types.Message):
+    print(message.web_app_data)
+    await message.answer(message.web_app_data)
 
 
 

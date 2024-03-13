@@ -5,13 +5,65 @@
 {% endblock %}
 
 {% block content %}
+<div class="container mx-auto flex flex-col justify-center items-center">
+    <div class="flex justify-center items-center">
+        <div class="flex justify-center items-center">
+            <a href="/tg" class="btn btn-ghost">Refresh</a>
+        </div>
+    </div>
+    <div class="flex justify-center items-center flex-col">
+        <h1 class="text-4xl">Привіт обери гру</h1>
+        <form method="post">
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Введіть ім'я</span>
+                </label>
+                <input type="text" name="name" placeholder="Введіть ім'я" class="input input-bordered">
+            </div>
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Введіть вік</span>
+                </label>
+                <input type="number" name="age" placeholder="Введіть вік" class="input input-bordered">
+            </div>
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text
+                    ">Оберіть гру</span>
+                </label>
+                <select name="game" class="select select-bordered">
+                    <option value="1">Шахи</option>
+                    <option value="2">Шашки</option>
+                    <option value="3">Гомоку</option>
+                    <option value="4">Крестики-нолики</option>
+                </select>
+            </div>
+            <div class="form-control my-3">
+                <button class="btn btn-primary">Відправити</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-<h1 class="text-4xl">Home</h1>
-<p class="text-lg">Welcome to the home page</p>
-<p class="text-sm text-primary">Ви просто космос</p>
+<script>
+    const tg = window.Telegram.WebApp;
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const name = formData.get('name');
+        const age = formData.get('age');
+        const game = formData.get('game');
 
-<a href='/about'>About</a>
+        const data = {
+            name,
+            age,
+            game
+        };
 
+        tg.sendData(JSON.stringify(data));
+        tg.close();
+    });
 
-
+</script>
 {% endblock %}
